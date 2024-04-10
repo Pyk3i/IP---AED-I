@@ -28,5 +28,3 @@ sumaUltimosDigitos
 comparar:: Int -> Int -> Int
 -- Necesito sumaUltimosDigitos primero para hacerlo 
 
-doble x = x + x
-triple x = x + x + x
