@@ -27,4 +27,3 @@ sumaUltimosDigitos
 
 comparar:: Int -> Int -> Int
 -- Necesito sumaUltimosDigitos primero para hacerlo 
-
