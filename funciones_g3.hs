@@ -16,14 +16,31 @@ bisiesto a = mod a 4 == 0
 
 absoluto:: Float -> Float
 absoluto x 
-    | x < 0 = x*(-1)
+    | x < 0 = -x
     | otherwise = x
 
 distanciaManhattan:: (Float, Float, Float) -> (Float, Float, Float) -> Float
 distanciaManhattan (a,b,c) (d,e,f) = absoluto((a-d)) + absoluto((b-e)) + absoluto((c-f))
 -- (Puedo hacer guardas pero es más pesados, mejor usar una funciòn que me ayude con los negativos)
 
-sumaUltimosDigitos 
+maximoabsoluto:: Float -> Float -> Float
+maximoabsoluto x y 
+    | absoluto(x) < absoluto(y) = absoluto(y)
+    | otherwise = absoluto(x)
 
-comparar:: Int -> Int -> Int
+maximo3:: Float -> Float -> Float -> Float
+maximo3 x y z
+    | x > y && x > z = x
+    | y > x && y > z = y
+    | otherwise = z
+
+algunoEs0:: Float -> Float -> Float -> Float -> Int
+algunoEs0 a b c d
+    | a / b == 0 = 1
+    | c / d == 0 = 2
+    | otherwise = 3
+
+--sumaUltimosDigitos 
+
+--comparar:: Int -> Int -> Int
 -- Necesito sumaUltimosDigitos primero para hacerlo 
