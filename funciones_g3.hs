@@ -40,7 +40,31 @@ algunoEs0 a b c d
     | c / d == 0 = 2
     | otherwise = 3
 
+ambosSon0:: Int -> Int -> Int -> Int -> Bool --Tengo que hacerlo con pattern matching y otro con guardas
+ambosSon0 a b c d = div a b == 0 && div c d == 0
+
+ambosSon0_v2:: Int -> Int -> Int -> Int -> Bool
+ambosSon0_v2 a b c d 
+    | div a b == 0 && div c d == 0 = True
+    | otherwise = False
+
+mismoIntervalo:: Float -> Float -> Bool
+mismoIntervalo a b 
+    | a <= 3 && b <= 3 = True
+    | 3 < a && a <= 7 && 3 < b && b <= 7 = True
+    | a > 7 && b > 7 = True
+    | otherwise = False
+
+esMultiploDe:: Int -> Int -> Bool
+esMultiploDe a b = a > 0 && b > 0 && mod a b == 0
+
+digitoUnidades:: Int -> Int
+digitoUnidades a
+    | a < 10 = a
+    | a < -10 =
+    | a >= 10 = 
+
 --sumaUltimosDigitos 
 
 --comparar:: Int -> Int -> Int
--- Necesito sumaUltimosDigitos primero para hacerlo 
+-- Necesito sumaUltimosDigitos primero para hacerlo
