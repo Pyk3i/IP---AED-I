@@ -60,11 +60,58 @@ esMultiploDe a b = a > 0 && b > 0 && mod a b == 0
 
 digitoUnidades:: Int -> Int
 digitoUnidades a
-    | a < 10 = a
-    | a < -10 =
-    | a >= 10 = 
+    | a > -10 && a < 0 = -a
+    | a < 10 && a > 0 = a
+    | a >= 10 =  a - (div a 10 * 10)
+    | a <= -10 = -a - (div (-a) 10 * 10)
+    | otherwise = 0
 
---sumaUltimosDigitos 
+digitoDecenas:: Int -> Int
+digitoDecenas a
+    | a > -10 && a < 10 = 0
+--    | a < 100 && a >= 10 = div a 10 
+--    | a > -100 && a <= -10 = div (-a) 10 
+    | a >= 10 = digitoUnidades(div a 10)
+    | a <= -10 = digitoUnidades(div (-a) 10)  
 
---comparar:: Int -> Int -> Int
--- Necesito sumaUltimosDigitos primero para hacerlo
+estanRelacionados:: Int -> Int -> Bool
+estanRelacionados a b = mod (a*a) (a*b) == 0
+
+prodInt:: (Float , Float) -> (Float , Float) -> Float
+prodInt (a,b) (c,d) = a*c + b*d
+
+distanciaPuntos:: (Float , Float) -> (Float , Float) -> Float
+distanciaPuntos (a,b) (c,d) = sqrt((c-a)*(c-a) + (d-b)*(d-b))
+
+sumaTernas:: (Int , Int , Int) -> Int
+sumaTernas (a, b, c) = a + b + c
+
+crearPar:: Float -> Float -> (Float, Float)
+crearPar a b = (a,b)
+
+-- (Ejercicio 5)
+
+f:: Int -> Int
+f n
+    |n <= 7 = n*n
+    |n > 7 = 2*n - 1
+
+g:: Int -> Int
+g n
+    |mod n 2 == 0 = div n 2
+    |otherwise = 3*n + 1
+
+todosMenores:: (Int, Int, Int) -> Bool
+todosMenores (a, b, c) = f a > g a && f b > g b && f c > g c
+
+-- Ejercicio 8
+sumaUltimosDosDigitos:: Int -> Int
+sumaUltimosDosDigitos x = mod (abs x) 10 + mod (div (abs x) 10) 10
+
+comparar:: Int -> Int -> Int
+comparar a b
+    |sumaUltimosDosDigitos a < sumaUltimosDosDigitos b = 1
+    |sumaUltimosDosDigitos a > sumaUltimosDosDigitos b = -1
+    |sumaUltimosDosDigitos a == sumaUltimosDosDigitos b = 0
+
+-- sumarSoloMultiplos:: (Int , Int , Int) -> Int -> Int
