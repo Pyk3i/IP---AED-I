@@ -1,17 +1,14 @@
-<<<<<<< HEAD
+
 --EJERCICIO 1
-=======
->>>>>>> c3f8733a6e8b4dd5b4b70710964eaf7183c35d9f
+
 fibonacci:: Int -> Int
 fibonacci n
     | n == 0 = 0
     | n == 1 = 1
     | n >= 2 = fibonacci(n - 1) + fibonacci(n - 2)
 
-<<<<<<< HEAD
 -- EJERCICIO 2
-=======
->>>>>>> c3f8733a6e8b4dd5b4b70710964eaf7183c35d9f
+
 parteEntera:: Float -> Int
 parteEntera n
     |n >= 0 && n < 1 = 0
@@ -19,15 +16,11 @@ parteEntera n
     |n < 0 && n > -1 = 0
     |n <= -1 = -1 + parteEntera(n+1)
 
-<<<<<<< HEAD
 -- EJERCICIO 3
-=======
->>>>>>> c3f8733a6e8b4dd5b4b70710964eaf7183c35d9f
 esDivisible:: Int -> Int -> Bool
 esDivisible x y
     |x == y = True
     |x < y = False
-<<<<<<< HEAD
     |x > y = esDivisible (x-y) y
 -- que pasa si x le resto muchas veces x
 
@@ -69,8 +62,3 @@ iesimoDigito n i
 
 -- EJERCICIO 9
 --esCapicua:: Int -> Bool
-=======
--- que pasa si x le resto muchas veces x
-
-
->>>>>>> c3f8733a6e8b4dd5b4b70710964eaf7183c35d9f
