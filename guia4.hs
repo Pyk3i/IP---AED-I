@@ -62,3 +62,30 @@ iesimoDigito n i
 
 -- EJERCICIO 9
 --esCapicua:: Int -> Bool
+
+-- EJERCICIO 10
+f1:: Int -> Int
+f1 n
+    |n == 0 = 1
+    |otherwise = 2^n + f1(n-1)
+
+f2:: Int -> Int -> Int
+f2 n q
+    |n == 1 = q
+    |otherwise = q^n + f2 (n-1) q
+
+{-- f3:: Int -> Int -> Int
+f3 n q
+    |--}
+
+-- EJERCICIO 13
+fDobleSum:: Int -> Int -> Int
+fDobleSum m p
+    |p == 1 = f2 m 1
+--    |m == 1 = 0
+    |otherwise = f2 p m + f2 p (m-1) 
+
+-- EJERCICIO 16
+-- menorDivisor:: Int -> Int
+-- menorDivisor n
+-- (Necesito función auxiliar (menorDivisorDesde m n) desde el 2 hacia arriba)
