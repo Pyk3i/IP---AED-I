@@ -2,10 +2,9 @@
 --EJERCICIO 1
 
 fibonacci:: Int -> Int
-fibonacci n
-    | n == 0 = 0
-    | n == 1 = 1
-    | n >= 2 = fibonacci(n - 1) + fibonacci(n - 2)
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci(n-1) + fibonacci(n-2)
 
 -- EJERCICIO 2
 
@@ -61,7 +60,10 @@ iesimoDigito n i
     |otherwise = iesimoDigito (div n 10) i
 
 -- EJERCICIO 9
---esCapicua:: Int -> Bool
+{--esCapicua:: Int -> Bool
+esCapicua n
+    | n < 100 && mod n 10 == div n 10 = True
+    | n > 100 = --}
 
 -- EJERCICIO 10
 f1:: Int -> Int
@@ -120,25 +122,77 @@ sucesion:: Int -> Float
 sucesion n
     |n == 1 = 2
     |otherwise = 2 + 1/sucesion(n-1) 
---    |otherwise = 2 + (1/(sucesion n-1))
 
 raizDe2Aprox:: Int -> Float
 raizDe2Aprox n = sucesion n - 1
 
+-- EJERCICIO 13
+fDobleSum :: Int -> Float -> Float
+fDobleSum 1 m = m
+fDobleSum n m = f2 n m + f2 (n-1) m
+--    |p == 1 = f2 m 1
+--    |m == 1 = 0
+--    |otherwise = f2 p m + f2 p (m-1) 
+
+
 -- EJERCICIO 14
 sumaPotencias:: Int -> Int -> Int -> Int
-sumaPotencias q n m
-    |n == 1 && m == 1 = q^2
---    |otherwise = q^(n + m) + sumaPotencias q n (m-1)
+sumaPotencias q 1 m = auxiliarSumPot q 1 m
+sumaPotencias q n m = q^(n+m) + auxiliarSumPot q (n-1) m
 
--- EJERCICIO 13
-{-- fDobleSum :: Float -> Float -> Float
-fDobleSum p m
-    |p == 1 = f2 m 1
---    |m == 1 = 0
-    |otherwise = f2 p m + f2 p (m-1) 
---}
+auxiliarSumPot:: Int -> Int -> Int -> Int
+auxiliarSumPot q n 1 = q^(n+1)
+auxiliarSumPot q n m = q^(n+m) + auxiliarSumPot q n (m-1)
+
+-- EJERCICIO 15
+auxiliarSumRac:: Float -> Float -> Float --(Sumatoria de un numerador fijo)
+auxiliarSumRac p q
+    |q == 1 = p
+    |otherwise = p/q + auxiliarSumRac p (q-1)
+
+sumaNaturales:: Float -> Float
+sumaNaturales 1 = 1
+sumaNaturales n = n + sumaNaturales (n-1)
+
+sumaRacionales:: Float -> Float -> Float
+sumaRacionales p q
+    |p == 1 = auxiliarSumRac 1 q
+    |otherwise = auxiliarSumRac p q + sumaRacionales (p-1) q 
+
 -- EJERCICIO 16
--- menorDivisor:: Int -> Int
--- menorDivisor n
--- (Necesito función auxiliar (menorDivisorDesde m n) desde el 2 hacia arriba)
+menorDivisor:: Int -> Int
+menorDivisor n
+    |n == 1 = 1
+    |otherwise = menorDivisorDesde n 2
+
+menorDivisorDesde:: Int -> Int -> Int
+menorDivisorDesde n m
+    |mod n m == 0 = m
+    |otherwise = menorDivisorDesde n (m+1)
+
+esPrimo:: Int -> Bool
+esPrimo n = n == menorDivisor n
+
+
+{--sonCoprimos:: Int -> Int -> Bool
+sonCoprimos n m = --}
+
+siguientePrimo:: Int -> Int
+siguientePrimo n
+    |esPrimo(n+1) = n+1
+    |otherwise = siguientePrimo(n+1)
+
+nEsimoPrimo:: Int -> Int
+nEsimoPrimo n
+    |n == 1 = 2
+    |otherwise = siguientePrimo(nEsimoPrimo(n-1))
+
+-- EJERCICIO 17
+fibAux :: Int -> Int -> Int -> Bool
+fibAux n fibanterior fib
+    |n == fib = True
+    |n < fib = False
+    |otherwise = fibAux n fib (fib+fibanterior)
+
+esFibonacci:: Int -> Bool
+esFibonacci n = fibAux n 0 1
