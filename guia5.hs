@@ -8,6 +8,7 @@ ultimo:: [Int] -> Int
 ultimo [x] = x
 ultimo xs = ultimo (tail xs)
 
+
 principio:: [t] -> [t] -- tail a la inversa
 principio (x:[]) = []
 principio (x : xs) = x : principio xs
@@ -19,7 +20,6 @@ auxReverso xs = auxReverso (tail xs)
 reverso:: [t] -> [t]
 reverso [x] = [x]
 reverso xs = auxReverso xs : reverso(principio xs)
-
 
 
 -- EJERCICIO 2 
@@ -46,7 +46,11 @@ maximo:: [Int] -> Int --Eliminar todos los menores hasta que quede el mayor
 --maximo [x] = x
 {--maximo xs
     |head xs <= head (tail xs) = head (tail xs)--}
+
 maximo (x:[]) = x
 maximo (x:(y:xs))
     | x >= y = maximo (x :xs)
     |otherwise = maximo (y:xs)
+
+
+
