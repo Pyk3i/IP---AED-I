@@ -116,14 +116,14 @@ ordenar [x] = [x]
 ordenar xs = maximo xs : ordenar (quitar (maximo xs) xs)
 
 maximo:: [Int] -> Int --Eliminar todos los menores hasta que quede el mayor
---maximo [x] = x
-{--maximo xs
-    |head xs <= head (tail xs) = head (tail xs)--}
-
 maximo (x:[]) = x
 maximo (x:(y:xs))
     | x >= y = maximo (x :xs)
     |otherwise = maximo (y:xs)
 
-
-
+-- EJERCICIO 4
+sacarBlancosRepetidos :: [Char] -> [Char]
+sacarBlancosRepetidos [] = []
+sacarBlancosRepetidos (x:(y:xs))
+    |x == ' ' && y == ' ' = sacarBlancosRepetidos (y:xs)
+    |otherwise = x : sacarBlancosRepetidos (y:xs)
