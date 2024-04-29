@@ -135,3 +135,41 @@ contarPalabras [x] = 1
 contarPalabras (x:y:xs)
     |y == ' ' && x /= ' ' = 1 + contarPalabras (sacarBlancosRepetidos (x:xs))
     |otherwise = contarPalabras (x:xs)
+
+palabras :: [Char] -> [[Char]]
+palabras [] = []
+palabras (x:xs)
+    |x /= ' ' = primerapalabra : palabras (aux2palabras xs)
+    |x == ' ' = palabras xs
+        where primerapalabra = auxpalabras (x:xs)
+
+aux2palabras :: [Char] -> [Char]
+aux2palabras [] = []
+aux2palabras (x:xs)
+    |x /= ' ' = aux2palabras xs 
+    |otherwise = xs
+
+auxpalabras :: [Char] -> [Char]
+auxpalabras [] = []
+auxpalabras (x:xs)
+    |x /= ' ' = x : auxpalabras xs
+    |otherwise = []
+
+palabraMasLarga :: [Char] -> [Char]
+palabraMasLarga [] = []
+-- palabraMasLarga (x:y:xs)
+--    |x =/ ' ' && y == ' ' && primerapalabra > segundapalabra =
+
+elimpalabracorta :: [Char] -> [Char] -- ////ARREGLAR/ //////
+elimpalabracorta [] = []
+alimpalabracorta (x:y:xs)
+    |x /= ' ' && y == ' ' && primpalabra > segpalabra = auxpalabras : elimpalabracorta xs 
+    |x /= ' ' && y == ' ' && primpalabra < segpalabra = aux2palabras : elimpalabracorta xs
+    |otherwise = auxpalabras xs 
+
+contadorletras :: [Char] -> Int
+contadorletras [] = 0
+contadorletras [x] = 1
+contadorletras (x:xs)
+    |x /= ' ' = 1 + contadorletras xs
+    |otherwise = 0
