@@ -1,5 +1,6 @@
 import Test.HUnit
 import Parcial
+import Parcial (personaConMasAmigos)
 
 
 main = runTestTT tests
@@ -13,6 +14,24 @@ tests = test [
   "todas diferentes" ~: (relacionesValidas [("ana", "pedro"), ("ana", "carlos")]) ~?= True
   ]
 
+testpersonas = test [
+    "una tupla valida" ~: (personas [("juan", "pedro")]) ~?= ["juan", "pedro"],
+    "tuplas diferentes" ~: (personas [("juan", "pedro") , ("martin", "ana")]) ~?= ["juan", "pedro", "martin", "ana"],
+    "tuplas con nombres repetidos" ~: (personas [("juan", "ana") , ("juan", "pedro"), ("ana", "martin")]) ~?= ["juan", "pedro", "ana","martin"],
+    "lista vacia" ~: (personas []) ~?= []
+  ]
+
+testamigosDe = test [
+  "lista vacia" ~: (amigosDe "_" []) ~?= [],
+  "caso valido" ~: (amigosDe "juan" [("juan", "ana") , ("juan", "pedro"), ("ana", "martin")]) ~?= ["ana", "pedro"],
+  "no tiene amigos" ~: (amigosDe "andres" [("juan", "ana") , ("juan", "pedro"), ("ana", "martin")]) ~?= []
+  ]
+
+testpersonaConMasAmigos = test [
+  "caso valido" ~: (personaConMasAmigos [("juan", "ana") , ("juan", "pedro"), ("juan", "martin")]) ~?= "juan",
+  "empate" ~: (personaConMasAmigos [("juan", "ana") , ("juan", "pedro"), ("ana", "martin")]) ~?= "ana",
+  "empate con una tupla" ~: (personaConMasAmigos [("juan", "ana")]) ~?= "ana"
+  ]
 -- -- EJEMPLOS
 
 -- USUARIO1 = "JUAN"
