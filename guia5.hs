@@ -124,6 +124,14 @@ maximo (x:(y:xs))
 -- EJERCICIO 4
 sacarBlancosRepetidos :: [Char] -> [Char]
 sacarBlancosRepetidos [] = []
+sacarBlancosRepetidos [x] = [x]
 sacarBlancosRepetidos (x:(y:xs))
-    |x == ' ' && y == ' ' = sacarBlancosRepetidos (y:xs)
+    |x == y && x == ' ' = sacarBlancosRepetidos (y:xs)
     |otherwise = x : sacarBlancosRepetidos (y:xs)
+
+contarPalabras :: [Char] -> Int
+contarPalabras [] = 0
+contarPalabras [x] = 1
+contarPalabras (x:y:xs)
+    |y == ' ' && x /= ' ' = 1 + contarPalabras (sacarBlancosRepetidos (x:xs))
+    |otherwise = contarPalabras (x:xs)
