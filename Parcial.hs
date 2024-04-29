@@ -20,7 +20,7 @@ amigosDe x ((a,b):xs)
     |otherwise && relacionesValidas((a,b):xs) = quitarRepetidos (amigosDe x xs) 
 
 personaConMasAmigos :: [(String, String)] -> String
-personaConMasAmigos [] = "yo"
+-- personaConMasAmigos [] = "yo"
 personaConMasAmigos xs
     |relacionesValidas xs = masRepetido (pasarTuplaALista xs)
 
