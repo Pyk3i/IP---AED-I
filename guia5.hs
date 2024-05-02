@@ -1,4 +1,4 @@
-import System.Win32 (COORD(xPos))
+--import System.Win32 (COORD(xPos))
 -- EJERCICIO 1
 longitud:: [Int] -> Int
 longitud xs
@@ -160,12 +160,12 @@ palabraMasLarga [] = []
 -- palabraMasLarga (x:y:xs)
 --    |x =/ ' ' && y == ' ' && primerapalabra > segundapalabra =
 
-elimpalabracorta :: [Char] -> [Char] -- ////ARREGLAR/ //////
+{--elimpalabracorta :: [Char] -> [Char] -- ////ARREGLAR/ //////
 elimpalabracorta [] = []
 alimpalabracorta (x:y:xs)
     |x /= ' ' && y == ' ' && primpalabra > segpalabra = auxpalabras : elimpalabracorta xs 
     |x /= ' ' && y == ' ' && primpalabra < segpalabra = aux2palabras : elimpalabracorta xs
-    |otherwise = auxpalabras xs 
+    |otherwise = auxpalabras xs --}
 
 contadorletras :: [Char] -> Int
 contadorletras [] = 0
