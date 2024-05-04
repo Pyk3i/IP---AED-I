@@ -1,3 +1,4 @@
+module ParcialEquipos where
 -- EJERCICIO 1
 atajaronSuplentes :: [(String, String)] -> [Int] -> Int -> Int
 atajaronSuplentes _ [] 0 = 0
