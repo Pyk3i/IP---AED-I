@@ -1,3 +1,4 @@
+import Parcial4 (ultimo)
 
 --EJERCICIO 1
 
@@ -175,7 +176,14 @@ esPrimo n = n == menorDivisor n
 
 
 {--sonCoprimos:: Int -> Int -> Bool
-sonCoprimos n m = --}
+sonCoprimos 1 1 = True
+sonCoprimos m n --} 
+
+listaDivisoresDesde :: Int -> Int -> [Int] -- Me da la lista de divisores de n de manera decreciente
+listaDivisoresDesde 0 _ = []
+listaDivisoresDesde m n
+    |n `mod` m == 0 = m : listaDivisoresDesde (m-1) n
+    |otherwise = listaDivisoresDesde (m-1) n
 
 siguientePrimo:: Int -> Int
 siguientePrimo n
@@ -196,3 +204,27 @@ fibAux n fibanterior fib
 
 esFibonacci:: Int -> Bool
 esFibonacci n = fibAux n 0 1
+
+-- EJERCICIO 18
+{--mayorDigitoPar :: Int -> Int
+mayorDigitoPar x 
+    |x < 10 && mod x 2 == 0 = x
+    |odd x = -1
+    |ultimoDigito <= penultimoDigito = mayorDigitoPar (mod (eliminaDigitoImpar x) 10) 
+    |ultimoDigito > penultimoDigito =  mayorDigitoPar (mod (eliminaDigitoImpar x) 10) * 10 + ultimoDigito
+        where ultimoDigito = iesimoDigito (eliminaDigitoImpar x) 1
+              penultimoDigito = iesimoDigito (eliminaDigitoImpar x) 2
+
+hayDigitoImpar :: Int -> Bool
+hayDigitoImpar x
+    |x == 0 = False
+    |odd ultimoDigito = True
+    |even ultimoDigito = hayDigitoImpar (mod x (10^(cantDigitos x - 1)))
+        where ultimoDigito = iesimoDigito x 1
+
+eliminaDigitoImpar :: Int -> Int
+eliminaDigitoImpar x
+    |odd ultimoDigito = eliminaDigitoImpar (mod x (10^(cantDigitos x - 1)))
+    |even ultimoDigito && hayDigitoImpar x = eliminaDigitoImpar (mod x (10^(cantDigitos x - 1))) * 10 + ultimoDigito
+    |otherwise = x
+        where ultimoDigito = iesimoDigito x 1 --}

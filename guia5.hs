@@ -173,3 +173,48 @@ contadorletras [x] = 1
 contadorletras (x:xs)
     |x /= ' ' = 1 + contadorletras xs
     |otherwise = 0
+
+-- EJERCICIO 5
+sumaAcumulada :: (Num t) => [t] -> [t]
+sumaAcumulada [] = []
+sumaAcumulada [x] = [x]
+sumaAcumulada (x:xs) = x : sumaAcumulada (sumaAcumuladaAux (x:xs))
+
+
+sumaAcumuladaAux :: (Num t) => [t] -> [t]
+sumaAcumuladaAux [] = []
+sumaAcumuladaAux [x] = [x]
+sumaAcumuladaAux (x:y:xs) = x + y : xs
+
+descomponerEnPrimos :: [Int] -> [[Int]]
+descomponerEnPrimos [] = []
+
+
+multiplicarLista :: [Int] -> Int
+multiplicarLista [] = 1
+multiplicarLista (x:xs) = x * multiplicarLista xs
+
+listaDivisoresPrimos :: [Int] -> [Int]
+listaDivisoresPrimos [] = []
+listaDivisoresPrimos (x:xs)
+    |esPrimo x = x : listaDivisoresPrimos xs
+    |otherwise = listaDivisoresPrimos xs
+
+listaDivisoresDesde :: Int -> Int -> [Int] -- Me da la lista de divisores de n de manera decreciente
+listaDivisoresDesde 0 _ = []
+listaDivisoresDesde m n
+    |n `mod` m == 0 = m : listaDivisoresDesde (m-1) n
+    |otherwise = listaDivisoresDesde (m-1) n
+
+menorDivisor:: Int -> Int
+menorDivisor n
+    |n == 1 = 1
+    |otherwise = menorDivisorDesde n 2
+
+menorDivisorDesde:: Int -> Int -> Int
+menorDivisorDesde n m
+    |mod n m == 0 = m
+    |otherwise = menorDivisorDesde n (m+1)
+
+esPrimo:: Int -> Bool
+esPrimo n = n == menorDivisor n
