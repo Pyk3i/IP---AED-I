@@ -112,3 +112,42 @@ def pares_de_10_a_40() -> int:
         i = i + 2
     return print(i)
 
+def eco():
+    return "eco"*10
+
+def cuentaRegresiva(numero: int):
+    while numero > 1:
+        print (numero)
+        numero = numero - 1
+    return print (numero, "\nDespegue")  
+
+def viajeEnElTiempo (año_partida: int, año_llegada: int):
+    while año_partida != año_llegada:
+        print ("Viajó un año al pasado, estamos en el año: ", año_partida)
+        año_partida = año_partida - 1
+    return print("Viajó un año al pasado, estamos en el año: ", año_llegada)
+
+def viajeEnElTiempoAC (año_partida: int):
+    while año_partida > -384:
+        if año_partida < 0:
+            print("Viajó 20 años en el pasado, estamos en el año:", -año_partida, "a.C")
+        else:
+            print("Viajó 20 años en el pasado, estamos en el año:", año_partida, "D.C")
+        año_partida = año_partida - 20
+    return print("Llegamos a la época de Aristóteles, estamos en el año:", -año_partida, "a.C")
+
+## EJERCICIO 7
+def unoAlDiez():
+    for i in range(1, 11, 1):
+        print (i)
+    return print()
+
+def paresDiezACuarenta():
+    for i in range(10, 41, 2):
+        print(i)
+    return print()
+
+def ecoFor():
+    for i in range(1, 10, 1):
+        print ("eco")
+    return print ("eco")
