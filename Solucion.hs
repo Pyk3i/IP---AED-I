@@ -216,10 +216,16 @@ todosLosDescifrados :: [String] -> [(String, String)]
 todosLosDescifrados [] = []
 todosLosDescifrados lista = descifradosLista lista 0
 
+eliminarRepetidos:: (Eq t) => [t] -> [t]
+eliminarRepetidos [] = []
+eliminarRepetidos (x:xs)
+    |elem x xs = eliminarRepetidos xs
+    |otherwise = x : eliminarRepetidos xs
+
 descifradosLista :: [String] -> Int -> [(String, String)]
 descifradosLista lista n 
-    |n == length lista = []
-    |cifradoEnLista (head lista) (tail lista) = tuplaCifrado : descifradosLista rotarLista (n+1)
+    |n == ((length lista)^2) = []
+    |cifradoEnLista (head lista) (tail lista) = (tuplaCifrado : descifradosLista rotarLista (n+1))
     |otherwise = descifradosLista rotarLista (n+1)
         where tuplaCifrado = (head lista, cifrado (head lista) (tail lista))
               rotarLista = (tail lista) ++ [(head lista)]
