@@ -260,10 +260,6 @@ eliminarExceso frase n
     |n == 0 = []
     |otherwise = head frase : eliminarExceso (tail frase) (n-1) 
 
-{--rotarFrase :: String -> Int -> String
-rotarFrase frase 0 = frase 
-rotarFrase frase n = rotarFrase (tail frase ++ [(head frase)]) (n-1)--}
-
 -- EJ 12
 cifrarVigenere :: String -> String -> String
 cifrarVigenere ""  ""   = []
@@ -287,8 +283,8 @@ descifrarVigenere frase1 frase2 = primeraLetra : descifrarSiguienteLetra
 peorCifrado :: String -> [String] -> String
 peorCifrado "" _ = ""
 peorCifrado frase [x] = x
-peorCifrado frase (x:y:claves) -- Compara la distancia de secuencia de la primera clave con la segunda
-    |x == "a" || y == "a" = "a"
+peorCifrado frase (x:y:claves) -- Compara la distancia de secuencia de frase con la primera clave y con la segunda
+    |x == "a" || y == "a" = "a" -- Si 'a' está en claves, da como resultado este, ya que no desplaza a frase
     |primeraClave <= segundaClave = peorCifrado frase (y:claves)
     |otherwise = peorCifrado frase (x:claves)
         where primeraClave = absoluto (distanciaSecuencias frase (cifrarVigenere frase x)) 
