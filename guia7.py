@@ -38,3 +38,8 @@ def longitud7(p: list[str]) -> bool:
             return False
 
 ##def esPalindromo(frase: str) -> bool:
+
+def inversoPalabra(frase: str) -> str:
+    for i in range(len(frase)):
+        res = (frase[len(frase) -1 - i])
+    return res
