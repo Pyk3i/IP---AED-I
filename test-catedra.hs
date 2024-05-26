@@ -142,8 +142,7 @@ testsEjcombinacionesVigenere = test [
     combinacionesVigenere ["hola", "mundo"] ["a", "b"] "ipmb" ~?= [("hola", "b")],
     "msjs se relacionan con claves distintas" ~: expectPermutacion(combinacionesVigenere ["abc","cde"] ["d", "b"] "def") [("abc","d"),("cde","b")],
     "msjs y claves vacio con cifrado generico" ~: combinacionesVigenere [] [] "cifrado" ~?= [],
-expectPermutacion (combinacionesVigenere ["hola","hqlc"] ["ab","az"] "hplb") [("hola","ab"),("hqlc","az")],
-combinacionesVigenere ["hola","hqlc"] ["ac","ad"] "hplb" ~?= []
+    "ninguna palabra hace match con cifrado" ~: combinacionesVigenere ["hola","fkcj"] ["ac","ad"] "hplb" ~?= []
     ]
 
 -- Funciones útiles

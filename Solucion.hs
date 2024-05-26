@@ -85,6 +85,39 @@ ultimo (y:ys) = ultimo ys
 
 -- EJ 7
 frecuencia :: String -> [Float]
+frecuencia frase = frecuenciaAux frase 0 25
+
+-- Crear una lista de 26 elementos donde cada posicion representa una letra del abecedario y las veces que aparece cada letra en la frase
+frecuenciaAux :: String -> Int -> Int -> [Float]
+frecuenciaAux frase desde hasta
+    | desde == hasta + 1 = []
+    | pertenece letra frase = fromIntegral(cuantasVecesAparece letra frase)/ fromIntegral(contarMinusculas frase)*100 : frecuenciaAux frase (desde + 1) hasta
+    | otherwise = 0.0 : frecuenciaAux frase (desde + 1) hasta
+    where
+        letra = chr (97+desde)
+
+--evalua si un elemento pertenece o no a la lista
+pertenece :: (Eq t) => t -> [t] -> Bool
+pertenece _ [] = False
+pertenece e (x:xs)
+    | e == x = True
+    | otherwise = pertenece e xs
+
+--dada una frase, devuelve la cantidad de minusculas en float para hacer la division 
+contarMinusculas :: String -> Int
+contarMinusculas [] = 0
+contarMinusculas (x:xs)
+    | esMinuscula x = 1 + contarMinusculas xs
+    | otherwise = contarMinusculas xs
+
+
+-- dado un elemento y una lista devuelve cuantas veces aparece en la lista
+cuantasVecesAparece :: (Eq t) => t -> [t] -> Int
+cuantasVecesAparece _ [] = 0
+cuantasVecesAparece e (x:xs)
+    | e == x = 1 + cuantasVecesAparece e xs
+    | otherwise = cuantasVecesAparece e xs
+{--frecuencia :: String -> [Float]
 frecuencia "" = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
 frecuencia frase
     |sonMayusc frase = plantilla
@@ -165,8 +198,26 @@ eliminarLetra :: Char -> String -> String
 eliminarLetra _ "" = ""
 eliminarLetra letra frase
     |letra == head frase = eliminarLetra letra (tail frase)
-    |otherwise = head frase : eliminarLetra letra (tail frase)
+    |otherwise = head frase : eliminarLetra letra (tail frase)--}
 
+cantLetrasDistintas :: String -> Int -- Cuenta La cantidad de letras minusculas distintas que hay 
+cantLetrasDistintas "" = 0
+cantLetrasDistintas [x] = 1
+cantLetrasDistintas (x:y:xs)
+    |not (esMinuscula x) = cantLetrasDistintas (eliminarLetra x (x:y:xs))
+    |x == y || x /= y = 1 + cantLetrasDistintas (eliminarLetra x (x:y:xs))
+
+contarLetras :: Char -> String -> Float
+contarLetras _ "" = 0
+contarLetras letra frase
+    |letra == head frase = 1 + contarLetras letra (tail frase)
+    |otherwise = contarLetras letra (tail frase)
+
+eliminarLetra :: Char -> String -> String
+eliminarLetra _ "" = ""
+eliminarLetra letra frase
+    |letra == head frase = eliminarLetra letra (tail frase)
+    |otherwise = head frase : eliminarLetra letra (tail frase)
 -- Ej 8
 cifradoMasFrecuente :: String -> Int -> (Char, Float)
 cifradoMasFrecuente "" _ = (' ', 0)
