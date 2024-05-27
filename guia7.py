@@ -1,5 +1,6 @@
 ## GUIA 7
 import math
+import random
 
 ## PARTE 1
 ## EJ 1
@@ -101,9 +102,9 @@ def tresVocales(frase: str) -> bool:
 
 vocales = ['a','e','i','o','u']
 ## EJ 1 
-def borrarPares(lista: list[int]) -> list[int]:
+def borrarPosPares(lista: list[int]) -> list[int]:
     for i in range(len(lista)):
-        if lista[i] % 2 == 0:
+        if i % 2 == 0:
             lista[i] = 0
     return lista
 
@@ -111,7 +112,7 @@ def borrarPares(lista: list[int]) -> list[int]:
 def borrarParesV2(lista: list[int]) -> list[int]:
     nuevaLista = []
     for i in range(len(lista)):
-        if lista[i] % 2 == 0:
+        if i % 2 == 0:
             nuevaLista.append(0)
         else:
             nuevaLista.append(lista[i])
@@ -145,3 +146,94 @@ def reemplazaVocales(s: list[chr]) -> list[chr]:
         else:
             s[i] = s[i]
     return s
+
+def daVueltaStr(s: list[chr]) -> list[chr]:
+    s = s[::-1]
+    return s
+
+def eliminarRepetidos(lista: list[chr]) -> list[chr]:
+    letras = []
+    repetidos = []
+    for i in range(len(lista)):
+        if (not lista[i] in letras):
+            letras.append(lista[i])
+        else:
+            repetidos.append(lista[i])
+    for i in range(len(repetidos)):
+        lista.remove(repetidos[i])
+    return lista
+
+# EJ 3
+def aprobado(notas: list[int]) -> int:
+    promedio = 0
+    for i in range(len(notas)):
+        if notas[i] < 4:
+            return 3
+        elif notas[i] >= 4:
+            promedio = promedio + notas[i]
+    if promedio / (len(notas)) >= 7:
+        return 1
+    elif (promedio / (len(notas)) >= 4) and (promedio / (len(notas)) < 7):
+        return 2
+    elif (promedio / len(notas)) < 4:
+        return 3
+
+# EJ 4
+def nombresEstudiantes() -> list[str]:
+    nombres = []
+    entrada = ""
+    while (1 != 0):
+        nombre = input('Nombre: ')
+        if nombre == 'listo':
+            return nombres
+        nombres.append(nombre)
+
+# EJ 5
+def historialSUBE() -> list[tuple]:
+    paso = ""
+    historial = []
+    while (1 != 0):
+        entrada1 = input("¿Que va a hacer? \n")
+        if entrada1 == "C":
+            carga = input("Ingrese monto: ")
+            historial.append((entrada1, carga))
+            paso = entrada1
+        elif entrada1 == "D":
+            descontar = input("Ingrese monto: ")
+            historial.append((entrada1, descontar))
+            paso == entrada1
+        else:
+            return historial
+
+# EJ 6
+def sieteYMedio() -> str:
+    puntaje = 0
+    historial = []
+    while(1 != 0):
+        juego = input('¿Sacar otra carta o plantarse? (s/p): ')
+        if juego == 's':
+            carta = random.randint(1,12)
+            while carta == 8 or carta == 9:
+                carta = random.randint(1,12)
+            if carta in [10,11,12]:
+                puntaje = puntaje + 0.5
+                historial.append(carta)
+            else:
+                puntaje = puntaje + carta
+                historial.append(carta)
+        if juego == 'p':
+            if puntaje > 7.5:
+                return print("Perdiste\n", historial)
+            else:
+                return print("Ganaste\n", historial)
+
+# EJ 7
+def perteneceACadaUnoV1(s: list[list[int]], e: int, res :list[bool]):
+    for i in range(len(s)):
+        res.append(pertenece(e, s[i]))
+
+def perteneceACadaUnoV2(s: list[list[int]], e: int, res :list[bool]):
+    res.clear() #limpia la lista en caso de tener algun elemento
+    for i in range(len(s)):
+        res.append(pertenece(e, s[i]))
+    return res
