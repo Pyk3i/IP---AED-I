@@ -1,6 +1,7 @@
 ## GUIA 7
 import math
 import random
+import numpy as np
 
 ## PARTE 1
 ## EJ 1
@@ -31,8 +32,8 @@ def sumaTotal(s: list[int]) -> int:
 
 ## EJ 4
 def ordenados(s: list[int]) -> bool:
-    for i in range(0, len(s), 1):
-        if i == len(s):
+    for i in range(len(s)):
+        if i == len(s) - 1:
             return True
         elif s[i] > s[i+1]:
             return False
@@ -101,15 +102,15 @@ def tresVocales(frase: str) -> bool:
 ## PARTE 2
 
 vocales = ['a','e','i','o','u']
-## EJ 1 
+# 1 
 def borrarPosPares(lista: list[int]) -> list[int]:
     for i in range(len(lista)):
         if i % 2 == 0:
             lista[i] = 0
     return lista
 
-## EJ 2
-def borrarParesV2(lista: list[int]) -> list[int]:
+# 2
+def borrarPosParesV2(lista: list[int]) -> list[int]:
     nuevaLista = []
     for i in range(len(lista)):
         if i % 2 == 0:
@@ -118,7 +119,7 @@ def borrarParesV2(lista: list[int]) -> list[int]:
             nuevaLista.append(lista[i])
     return nuevaLista
 
-## EJ 3
+# 3
 def eliminaVocales(frase: str) -> str:
     res = ""
     for i in range(len(frase)):
@@ -137,7 +138,7 @@ def borrarVocales(lista: list[chr]) -> list[chr]:
             lista[i] = ''
     return lista
 
-## EJ 4
+# 4
 def reemplazaVocales(s: list[chr]) -> list[chr]:
     vocales = ['a','e','i','o','u']
     for i in range(len(s)):
@@ -179,6 +180,7 @@ def aprobado(notas: list[int]) -> int:
         return 3
 
 # EJ 4
+# 1
 def nombresEstudiantes() -> list[str]:
     nombres = []
     entrada = ""
@@ -188,7 +190,7 @@ def nombresEstudiantes() -> list[str]:
             return nombres
         nombres.append(nombre)
 
-# EJ 5
+# 2
 def historialSUBE() -> list[tuple]:
     paso = ""
     historial = []
@@ -205,7 +207,7 @@ def historialSUBE() -> list[tuple]:
         else:
             return historial
 
-# EJ 6
+# 3
 def sieteYMedio() -> str:
     puntaje = 0
     historial = []
@@ -227,13 +229,54 @@ def sieteYMedio() -> str:
             else:
                 return print("Ganaste\n", historial)
 
-# EJ 7
+# EJ 5
+# 1
 def perteneceACadaUnoV1(s: list[list[int]], e: int, res :list[bool]):
     for i in range(len(s)):
         res.append(pertenece(e, s[i]))
 
+# 2
 def perteneceACadaUnoV2(s: list[list[int]], e: int, res :list[bool]):
     res.clear() #limpia la lista en caso de tener algun elemento
     for i in range(len(s)):
         res.append(pertenece(e, s[i]))
     return res
+
+# 3
+def esMatriz(s: list[list[int]]) -> bool:
+    if len(s) == 0:
+        return False
+    for i in range(len(s)):
+        if len(s[0]) == 0 or (len(s[i]) != len(s[0])):
+            return False
+    return True
+
+# 4
+def filasOrdenadas(m: list[list[int]], res: list[bool]):
+    res.clear()
+    for i in range(len(m)):
+        res.append(ordenados(m[i]))
+#    return res
+
+# 5
+def matrizMultiplicada(d: int, p: int):
+    matriz = np.random.random((d, d))
+    res = np.zeros([d,d])
+    for m in range(p):
+        for i in range(d):
+            for j in range(d):
+                for k in range(d):
+                    res[i][j] = res[i][j] + (matriz[i][k] * matriz[k][j])
+    return res
+
+def pruebaMultiplicacion(p: int):
+    matriz = np.array([[1,2],[2,1]])
+    res = np.zeros([2,2])
+    for m in range(p):
+        for i in range(2):
+            for j in range(2):
+                for k in range(2):
+                    res[i][j] = res[i][j] + (matriz[i][k] * matriz[k][j])
+    return res
+
+a = np.array([[1,2],[2,1]])
