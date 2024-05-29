@@ -1,0 +1,57 @@
+#from queue import LifoQUeue as Pila
+# EJ 1
+# 1
+def contar_lineas(nombre: str) -> int:
+    contador = 0
+    archivo = open(nombre, 'r', encoding = "utf-8")
+    for line in archivo:
+        contador += 1
+    archivo.close()
+    return contador
+
+# 2
+def existe_palabra(nombre: str, palabra: str) -> bool:
+    archivo = open(nombre, 'r', encoding = "utf-8")
+    for line in archivo:
+        if palabra in line:
+            return True
+    return False
+
+# 3
+def cant_apariciones(nombre_archivo: str, palabra: str) -> int:
+    archivo = open(nombre_archivo, 'r', encoding = "utf-8")
+    contador = 0
+    for line in archivo:
+        contador += cant_aparicionesAux(palabra, line)
+    return contador
+
+def cant_aparicionesAux(palabra: str, linea: str) -> int:
+    contador = 0
+    for i in range(len(linea)):
+        if palabra in linea:
+            contador += 1
+            linea = linea.replace(palabra, "", 1)
+    return contador
+
+# EJ 2
+def clonar_sin_comentarios(nombre_archivo: str) -> str:
+    archivo = open(nombre_archivo, 'r', encoding = "utf-8")
+    for line in archivo:
+        if not(es_comentario(line)):
+            res = print(line)
+    return res
+
+def es_comentario(linea: str):
+    for i in range(len(linea)):
+        if linea[0] == '#':
+            return True
+        elif linea[i] == '#' and linea[i-1::-1] == ' '*i:
+            return True
+    return False
+
+def invertir_linea(nombre_archivo: str):
+    archivo = open(nombre_archivo, 'a', encoding = "utf-8")
+    lista = archivo.readlines()
+    for i in range(len(lista)-1, -1, -1):
+        archivo.write(lista[i])
+        archivo.write('\n')
