@@ -1,0 +1,13 @@
+nro de LU, materia, fecha, nota   
+00001, Algebra I, 07/2024, 7 
+00001, IP, 06/2024, 8
+00001, Algo II, 11/2024, 10 
+00001, Analisis I, 11/2024, 6
+00002, Algebra I, 07/2024, 6 
+00002, IP, 06/2024, 10
+00002, Algo II, 11/2024, 4
+00002, Analisis I, 11/2024, 6 
+00003, Algebra, 07/2024, 8
+00003, IP, 06/2024, 7
+00003, Algo II, 11/2024, 9
+00003, Analisis I, 11/2024, 10 
