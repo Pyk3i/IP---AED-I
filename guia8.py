@@ -412,3 +412,80 @@ def clientes(n: int):
             clientes.append([('nombre', 'DNI', False, True)])
             contador = contador + 1
     return clientes
+
+# EJ 19
+
+def agruparPorLongitud(nombre_archivo: str) -> dict:
+    archivo = open(nombre_archivo, 'r', encoding = 'utf-8')
+    lista = enlistarPorLongitud(leerYEnlistar(nombre_archivo))
+    diccionario = {}
+    for i in range (len(lista) -1 ,-1, -1):
+        longitud = len(lista[i][0])
+        n_palabras = len(lista[i])
+        diccionario[longitud] = n_palabras
+    archivo.close()
+    return diccionario
+
+def leerYEnlistar(nombre_archivo: str) -> list[str]:
+    lista = []
+    archivo = open(nombre_archivo, 'r', encoding = 'utf-8')
+    lineas = archivo.readlines()
+    p = ""
+    for i in range(len(lineas)):
+        linea = lineas[i]
+        for j in range(len(linea)-1):
+            if (linea[j] != ' ') or (j == len(linea)):
+                p = p + linea[j]
+            if (linea[j] == ' ' or j == len(linea) - 2) and len(p) != 0:
+                lista.append(p)
+                p = ""
+    archivo.close()
+    return lista
+
+def enlistarPorLongitud(palabras: list[str]) -> list[list[str]]:
+    lista = []
+    agrupar = []
+    max = 0
+    for i in range(len(palabras)):
+        if len(palabras[i]) > max:
+            max = len(palabras[i])
+    while max != 0:
+        for i in range(len(palabras)):
+            if len(palabras[i]) == max:
+                agrupar.append(palabras[i])
+        if agrupar != []:
+            lista.append(agrupar)
+            agrupar = []
+        max = max - 1
+    return lista
+
+def calcularPromedioPorEstudiante(nombre_archivo_notas: str) -> dict[str, int]: #{LU : promedio}
+    archivo = open(nombre_archivo_notas, 'r', encoding = 'utf-8')
+    promedio_x_LU = {}
+    libretas = libretas_universitarias(nombre_archivo_notas)
+    for i in range(len(libretas)):
+        promedio = promedio_estudiante(nombre_archivo_notas, libretas[i])
+        promedio_x_LU[libretas[i]] = promedio
+    archivo.close()
+    return promedio_x_LU
+
+# EJ 21
+def la_palabra_mas_frecuente(nombre_archivo: str):
+    diccionario = diccionario_palabras(nombre_archivo)
+
+def diccionario_palabras(nombre_archivo: str) -> dict:
+    archivo = open(nombre_archivo, 'r', encoding = 'utf-8')
+    cant_palabras = []
+    palabras = {}
+    lista_palabras = leerYEnlistar(nombre_archivo)
+    contador = 0
+    for i in range(len(lista_palabras)):
+        palabra = lista_palabras[i]
+        for j in range(len(lista_palabras)):
+            if palabra == lista_palabras[j]:
+                contador = contador + 1
+        cant_palabras.append(contador)
+        contador = 0
+        palabras[palabra] = cant_palabras[i]
+    archivo.close
+    return palabras
