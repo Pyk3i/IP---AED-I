@@ -470,22 +470,89 @@ def calcularPromedioPorEstudiante(nombre_archivo_notas: str) -> dict[str, int]: 
     return promedio_x_LU
 
 # EJ 21
-def la_palabra_mas_frecuente(nombre_archivo: str):
-    diccionario = diccionario_palabras(nombre_archivo)
-
-def diccionario_palabras(nombre_archivo: str) -> dict:
-    archivo = open(nombre_archivo, 'r', encoding = 'utf-8')
-    cant_palabras = []
-    palabras = {}
-    lista_palabras = leerYEnlistar(nombre_archivo)
-    contador = 0
+def la_palabra_mas_frecuente(nombre_archivo: str) -> str:
+    archivo = open(nombre_archivo, 'r', encoding = "utf-8")
+    lista_palabras : list[str] = leerYEnlistar(nombre_archivo)
+    diccionario : dict = {}
+    max_apariciones : int = 0
+    palabra : str = ""
     for i in range(len(lista_palabras)):
-        palabra = lista_palabras[i]
-        for j in range(len(lista_palabras)):
-            if palabra == lista_palabras[j]:
-                contador = contador + 1
-        cant_palabras.append(contador)
-        contador = 0
-        palabras[palabra] = cant_palabras[i]
-    archivo.close
-    return palabras
+        if lista_palabras[i] not in diccionario:
+            diccionario[lista_palabras[i]] = 0
+        if lista_palabras[i] in diccionario:
+            diccionario[lista_palabras[i]] += 1
+    lista = list(diccionario.items())
+    for i in range(len(lista)):
+        tupla = lista[i]
+        if tupla[1] > max_apariciones:
+            palabra = tupla[0]
+            max_apariciones = tupla[1]
+    archivo.close()
+    return palabra
+
+# EJ 22
+hist_1 = Pila()
+hist_2 = Pila()
+hist_3 = Pila()
+
+hist_1.put('google.com')
+hist_1.put('instagram.com')
+hist_1.put('whatsapp.com')
+hist_2.put('facebook.com')
+hist_3.put('instagram.com')
+
+historiales : dict[str, Pila[str]]= {'usuario1': hist_1, 
+                                    'usuario2': hist_2, 
+                                    'usuario3' : hist_3}
+
+def visitar_sitio(historial : dict[str, Pila[str]], usuario: str, sitio: str):
+    if usuario not in historial:
+        historial[usuario] = Pila()
+        historial[usuario].put(sitio)
+    elif usuario in historial:
+        historial[usuario].put(sitio)
+    return historial
+
+def navegar_atras(historiales: dict[str, Pila[str]], usuario : str):
+    hist_usuario = historiales[usuario]
+    sitio_actual = hist_usuario.get()
+    sitio_anterior = hist_usuario.get()
+    hist_usuario.put(sitio_actual)
+    hist_usuario.put(sitio_anterior)
+    return historiales
+
+# EJ 23
+inventario : dict[str, dict[str, int]] = {'Camisa': {'Precio' : 20.0, 'Cantidad' : 10},
+                                            'Pantalon': {'Precio' : 30.0, 'Cantidad' : 30},
+                                            'Zapatillas': {'Precio': 20, 'Cantidad' : 0}}
+
+# 1
+def agregar_producto(inventario: dict[str, dict[str, float]], nombre: str, precio: float, cantidad: int) -> dict[str, dict[str, float]]:
+    precio_cantidad = {'Precio' : precio, 'Cantidad': cantidad}
+    inventario[nombre] = precio_cantidad
+    return inventario
+
+# 2
+def actualizar_stock(inventario: dict[str, dict[float, int]], nombre: str, cantidad: int) -> dict[str, dict[float, int]]:
+    producto = inventario[nombre]
+    producto['Cantidad'] = cantidad
+    return inventario
+
+# 3
+def actualizar_precio(inventario: dict[str, dict[float, int]], nombre: str, precio: int) -> dict[str, dict[float, int]]:
+    producto = inventario[nombre]
+    producto['Precio'] = precio
+    return inventario
+
+# 4
+def calcular_valor_inventario(inventario: dict[str, dict[str, float]]) -> float:
+    claves = list(inventario.keys())
+    suma = 0
+    for i in range(len(claves)):
+        valores = inventario[claves[i]]
+        key_valores = list(valores.keys())
+        suma = suma + (valores[key_valores[0]]) * (valores[key_valores[1]])
+    return suma        
+
+
+
