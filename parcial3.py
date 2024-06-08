@@ -48,11 +48,54 @@ def min_y_max(lista: list[tuple[int, float]]) -> tuple[float]:
     return (min, max)
 
 # EJ 4
-#def sudoku_valido(sudoku: list[list[int]]) -> bool:
+m = [
+[1, 2, 3, 4, 5, 5, 7, 8, 9],
+[9, 8, 7, 6, 4, 5, 3, 2, 1],
+[0, 0, 0, 0, 0, 0, 1, 0, 0],
+[0, 0, 0, 0, 0, 4, 0, 0, 0],
+[0, 0, 0, 0, 6, 0, 0, 0, 0],
+[0, 0, 0, 5, 0, 0, 0, 0, 0],
+[0, 0, 4, 0, 0, 0, 0, 0, 0],
+[0, 3, 0, 0, 0, 0, 0, 0, 0],
+[2, 0, 0, 0, 0, 0, 0, 0, 0]
+]
 
-def verifica_columna(n : int, m: list[list[int]]) -> bool:
+def sudoku_valido(sudoku: list[list[int]]) -> bool:
+    lista_columnas = columnas(sudoku)
+    if repetidos_en_lista(sudoku) or repetidos_en_lista(lista_columnas):
+        return False
+    return True
+
+
+def columnas(filas: list[list[int]]) -> list[list[int]]:
+    posicion : int = 0
+    res : list[list[int]] = []
+    temp : list[int] = []
+    while len(res) != len(filas):
+        for i in range(len(filas)):
+            fila = filas[i]
+            temp.append(fila[posicion])
+            if len(temp) == len(fila):
+                res.append(temp)
+                temp = []
+                posicion += 1
+    return res
+
+def hay_repetidos(lista: list[int]) -> bool: #distintos de 0
     contador = 0
-    for i in range(len(m)):
-        fila = m[i]
-        if fila[i] == n:
-            for j in range(len(fila)): ## Ver como bajar hacia la siguiente fila
+    distintos_de_cero = 0
+    for i in range(len(lista)):
+        elem = lista[i]
+        if elem != 0:
+            distintos_de_cero += 1
+        for j in range(len(lista)):
+            if elem == lista[j] and lista[j] != 0 and elem != 0:
+                contador += 1
+    return contador != distintos_de_cero
+
+def repetidos_en_lista(listas: list[list[int]]) -> bool:
+    for i in range(len(listas)):
+        lista = listas[i]
+        if hay_repetidos(lista):
+            return True
+    return False
