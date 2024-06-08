@@ -69,15 +69,15 @@ torneos = {2023:["nz", "sud", "arg", "aus"], 2022:["nz", "sud", "aus", "arg"]}
 
 def cuenta_posiciones_por_nacion(naciones: list[str], torneos: dict[int, list[str]]) -> dict[str, list[int]]:
     hist_posiciones : dict[str, list[int]] = {}
-    elem_torneos = list(torneos.values())
+    elem_torneos : list[str] = list(torneos.values())
     for i in range(len(naciones)):
         hist_posiciones[naciones[i]] = sumar_en_listas(naciones[i], elem_torneos)
     return hist_posiciones
 
 def sumar_en_listas(nacion: str, lista: list[list[int]]) -> list[int]:
-    posiciones = [0]*(len(lista[0]))
+    posiciones : list[int] = [0]*(len(lista[0]))
     for i in range(len(lista)):
-        elem = lista[i]
+        elem : list[str] = lista[i]
         for j in range(len(elem)):
             if nacion == elem[j]:
                 posiciones[j] = posiciones[j] + 1
